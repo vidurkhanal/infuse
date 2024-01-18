@@ -14,13 +14,14 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/vidurkhanal/infuse/constants"
+	"github.com/vidurkhanal/infuse/handlers"
 	"github.com/vidurkhanal/infuse/middlewares"
 )
 
 func StartHTTPServer() {
 	app := fiber.New(fiber.Config{
-		// Marshal and Unmarshal JSON using goccy/go-json, Benchmarked it to be the faster
-		// than the standard encoding/json
+		// Marshal and Unmarshal JSON using goccy/go-json, Benchmarked
+		// it to be the faster than the standard encoding/json
 		JSONEncoder: json.Marshal,
 		JSONDecoder: json.Unmarshal,
 	})
@@ -75,6 +76,11 @@ func StartHTTPServer() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})
+
+	v1 := app.Group("/v1")
+	v1.Post("/chat/completions", handlers.ChatCompletionsHandler)
+	v1.Post("/completions", handlers.CompletionsHandler)
+	v1.Post("/embedding", handlers.EmbeddingHandler)
 
 	if err := app.Listen(":8080"); err != nil {
 		// Graceful shutdown
