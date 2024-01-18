@@ -1,4 +1,4 @@
-**Infuse** is the gateway between your app and hosted LLMs. It streamlines API requests to dozens of hosted LLMs with a standarized RESTful API. 
+**Infuse** is the gateway between your app and hosted LLMs. It streamlines API requests to dozens of hosted LLMs with a standarized RESTful API. <br><br>
 
 ✅&nbsp; **Load balance** across multiple models, providers, and keys <br> 
 ✅&nbsp; **Fallbacks** make sure your app stays resilient  <br>
@@ -9,7 +9,6 @@
 ## Supported Providers [WIP]
 
 | Provider  | Support | Stream | Supported Endpoints |
-|---|---|---|---|--|
 | OpenAI | ✅  |✅  | `/completions`, `/chat/completions`,`/embeddings` |
 | Azure OpenAI | ✅  |✅  | `/completions`, `/chat/completions`,`/embeddings` |
 | Anyscale | ✅   | ✅  | `/chat/completions` |
