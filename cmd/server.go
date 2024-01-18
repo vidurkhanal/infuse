@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/goccy/go-json"
@@ -12,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/vidurkhanal/infuse/constants"
 	"github.com/vidurkhanal/infuse/middlewares"
 )
 
@@ -24,6 +26,11 @@ func StartHTTPServer() {
 	})
 
 	// Middlewares
+	//
+	// CORS middleware for Fiber that can be used to enable Cross-Origin
+	// Resource Sharing with various options.
+	//  https://docs.gofiber.io/api/middleware/cors
+	app.Use(cors.New())
 
 	// Idempotency middleware for Fiber allows for fault-tolerant APIs
 	// where duplicate requests — for example due to networking issues
@@ -38,7 +45,7 @@ func StartHTTPServer() {
 	// https://docs.gofiber.io/api/middleware/monitor
 	// Written above the logger middleware so that logger excludes the /metrics endpoint
 	app.Get("/metrics", monitor.New(monitor.Config{
-		Title:   "Infuse Server Metrics",
+		Title:   fmt.Sprintf("%s Server Metrics", constants.POWERED_BY),
 		Refresh: time.Duration(1) * time.Second,
 	}))
 
@@ -49,11 +56,6 @@ func StartHTTPServer() {
 		// For more options, see the Config section
 		Format: "${pid} ${locals:requestid} ${status} - ${method} ${path}\200b\n",
 	}))
-
-	// CORS middleware for Fiber that can be used to enable Cross-Origin
-	// Resource Sharing with various options.
-	//  https://docs.gofiber.io/api/middleware/cors
-	app.Use(cors.New())
 
 	// Liveness and readiness probes middleware for Fiber
 	// that provides two endpoints for checking the liveness and readiness
