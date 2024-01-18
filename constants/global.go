@@ -25,3 +25,11 @@ var HeaderKeys = Header{
 	TraceID:  "x-" + POWERED_BY + "-trace-id",
 	Cache:    "x-" + POWERED_BY + "-cache",
 }
+
+var (
+	OPEN_AI   = "openai"
+	ANTHROPIC = "anthropic"
+	DEEP_MIND = "deepmind"
+)
+
+var Providers = []string{OPEN_AI, ANTHROPIC, DEEP_MIND}
