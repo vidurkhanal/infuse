@@ -8,13 +8,4 @@
 
 ## Supported Providers [WIP]
 
-| Provider  | Support | Stream | Supported Endpoints |
-| OpenAI | ✅  |✅  | `/completions`, `/chat/completions`,`/embeddings` |
-| Azure OpenAI | ✅  |✅  | `/completions`, `/chat/completions`,`/embeddings` |
-| Anyscale | ✅   | ✅  | `/chat/completions` |
-| Google Gemini & Palm | ✅  |✅  | `/generateMessage`, `/generateText`, `/embedText` |
-| Anthropic  | ✅  |✅  | `/messages`, `/complete` |
-| Cohere  | ✅  |✅  | `/generate`, `/embed` |
-| Together AI  | ✅  |✅  | `/chat/completions`, `/completions`, `/inference` |
-| Perplexity  | ✅  |✅  | `/chat/completions` |
-| Mistral  | ✅  |✅  | `/chat/completions`, `/embeddings` |
+OpenAI, Anyscale, Mistral, Perplexity.ai
