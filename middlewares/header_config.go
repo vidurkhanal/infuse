@@ -40,11 +40,11 @@ type HeaderConfigRetry struct {
 type HeaderConfig struct {
 	Strategy      HeaderConfigStrategy `json:"strategy"`
 	Provider      string               `json:"provider"`
-	APIKey        string               `json:"api_key"`
+	APIKey        string               `json:"apiKey"`
 	Cache         HeaderConfigCache    `json:"cache"`
 	Retry         HeaderConfigRetry    `json:"retry"`
 	Weight        int                  `json:"weight"`
-	OnStatusCodes []int                `json:"on_status_codes"`
+	OnStatusCodes []int                `json:"onStatusCodes"`
 	Targets       []HeaderConfig       `json:"targets"`
 }
 
