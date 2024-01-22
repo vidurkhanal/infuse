@@ -27,9 +27,10 @@ var HeaderKeys = Header{
 }
 
 var (
-	OPEN_AI   = "openai"
-	ANTHROPIC = "anthropic"
-	DEEP_MIND = "deepmind"
+	OPEN_AI       = "openai"
+	ANTHROPIC     = "anthropic"
+	DEEP_MIND     = "deepmind"
+	AZURE_OPEN_AI = "azure-openai"
 )
 
 var Providers = []string{OPEN_AI, ANTHROPIC, DEEP_MIND}
