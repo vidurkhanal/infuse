@@ -9,11 +9,6 @@ import (
 	"github.com/vidurkhanal/infuse/constants"
 )
 
-type HeaderConfig struct {
-	Provider string `json:"provider"`
-	Targets  string `json:"targets"`
-}
-
 func RequestValidator(c *fiber.Ctx) error {
 	if c.Get("content-type") == "" ||
 		(c.Get("content-type") != "application/json" &&
@@ -47,8 +42,15 @@ func RequestValidator(c *fiber.Ctx) error {
 			constants.POWERED_BY))), &headerConfig); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status": "error",
-			"message": fmt.Sprintf("%s must be a valid json",
-				fmt.Sprintf("x-%s-config", constants.POWERED_BY)),
+			"message": fmt.Sprintf("%s must be a valid json \n %s",
+				fmt.Sprintf("x-%s-config", constants.POWERED_BY), err),
+		})
+	}
+
+	if err := headerConfig.Validate(); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  "error",
+			"message": err.Error(),
 		})
 	}
 
