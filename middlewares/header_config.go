@@ -8,18 +8,14 @@ import (
 	"github.com/vidurkhanal/infuse/constants"
 )
 
-const (
-	StrategySingle      = "single"
-	StrategyLoadBalance = "loadbalance"
-	StrategyFallback    = "fallback"
-
-	CacheSimple   = "simple"
-	CacheSemantic = "semantic"
-)
-
 var (
-	STRATEGY_MODE []string = []string{StrategySingle, StrategyLoadBalance, StrategyFallback}
-	CACHE_MODE    []string = []string{CacheSimple, CacheSemantic}
+	STRATEGY_MODE []string = []string{
+		constants.StrategyFallback,
+		constants.StrategySingle,
+		constants.StrategyLoadBalance,
+	}
+
+	CACHE_MODE []string = []string{constants.CacheSimple, constants.CacheSemantic}
 )
 
 type HeaderConfigStrategy struct {

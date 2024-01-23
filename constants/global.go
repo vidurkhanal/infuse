@@ -34,3 +34,12 @@ var (
 )
 
 var Providers = []string{OPEN_AI, ANTHROPIC, DEEP_MIND}
+
+const (
+	StrategySingle      = "single"
+	StrategyLoadBalance = "loadbalance"
+	StrategyFallback    = "fallback"
+
+	CacheSimple   = "simple"
+	CacheSemantic = "semantic"
+)

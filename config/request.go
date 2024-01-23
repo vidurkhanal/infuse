@@ -1,7 +1,7 @@
 package config
 
 type Config struct {
-	// mode maybe "single" | "fallback" | "loadbalance" | "scientist";
+	/** maybe "single" | "fallback" | "loadbalance" | "scientist" */
 	Mode     string        `json:"mode"`
 	Options  []Option      `json:"options"`
 	Targets  []Target      `json:"targets"`
