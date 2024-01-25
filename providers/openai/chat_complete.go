@@ -98,3 +98,12 @@ func NewOpenAIChatCompleteConfig() *OpenAIChatCompleteConfig {
 		},
 	}
 }
+
+type OpenAIChatCompleteResponse struct {
+	*providers.ChatCompleteResponse
+	SystemFingerPrint string `json:"system_fingerprint"`
+}
+
+func OpenAIChatCompleteResponseTransform(response OpenAIChatCompleteResponse) OpenAIChatCompleteResponse {
+	return response
+}

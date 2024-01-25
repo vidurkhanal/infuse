@@ -12,6 +12,14 @@ func (c *OpenAIAPIConfig) Headers(API_KEY string) map[string]string {
 	}
 }
 
+func (c *OpenAIAPIConfig) GetBaseURL() string {
+	return c.BaseURL
+}
+
+func (c *OpenAIAPIConfig) GetEndpoint() string {
+	return c.BaseURL + c.ChatComplete
+}
+
 func NewOpenAIAPIConfig() *OpenAIAPIConfig {
 	return &OpenAIAPIConfig{
 		BaseURL:      "https://api.openai.com/v1",
