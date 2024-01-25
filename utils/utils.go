@@ -21,7 +21,7 @@ func ConstructConfig(c *fiber.Ctx) (config.Target, error) {
 	if config.Provider == "" && len(config.Targets) == 0 {
 		config.Provider = c.Get(fmt.Sprintf("x-%s-mode", constants.POWERED_BY))
 		config.ApiKey = getBearerToken(c.Get("authorization"))
-		if config.Provider == constants.AZURE_OPEN_AI {
+		if config.Provider == string(constants.AZURE_OPEN_AI) {
 			config.ResourceName = c.Get(fmt.Sprintf("x-%s-azure-resource-name", constants.POWERED_BY))
 			config.DeploymentId = c.Get(fmt.Sprintf("x-%s-azure-deployment-id", constants.POWERED_BY))
 			config.ApiVersion = c.Get(fmt.Sprintf("x-%s-azure-api-version", constants.POWERED_BY))
