@@ -18,14 +18,22 @@ import (
 	"github.com/vidurkhanal/infuse/middlewares"
 )
 
-func StartHTTPServer() {
-	app := fiber.New(fiber.Config{
-		// Marshal and Unmarshal JSON using goccy/go-json, Benchmarked
-		// it to be the faster than the standard encoding/json
-		JSONEncoder: json.Marshal,
-		JSONDecoder: json.Unmarshal,
-	})
+type App struct {
+	*fiber.App
+}
 
+func NewApp() App {
+	return App{
+		App: fiber.New(fiber.Config{
+			// Marshal and Unmarshal JSON using goccy/go-json, Benchmarked
+			// it to be the faster than the standard encoding/json
+			JSONEncoder: json.Marshal,
+			JSONDecoder: json.Unmarshal,
+		}),
+	}
+}
+
+func (app App) StartHTTPServer() {
 	// Middlewares
 	//
 	// CORS middleware for Fiber that can be used to enable Cross-Origin
