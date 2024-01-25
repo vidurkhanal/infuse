@@ -26,14 +26,16 @@ var HeaderKeys = Header{
 	Cache:    "x-" + POWERED_BY + "-cache",
 }
 
+type Provider string
+
 var (
-	OPEN_AI       = "openai"
-	ANTHROPIC     = "anthropic"
-	DEEP_MIND     = "deepmind"
-	AZURE_OPEN_AI = "azure-openai"
+	OPEN_AI       Provider = "openai"
+	ANTHROPIC     Provider = "anthropic"
+	DEEP_MIND     Provider = "deepmind"
+	AZURE_OPEN_AI Provider = "azure-openai"
 )
 
-var Providers = []string{OPEN_AI, ANTHROPIC, DEEP_MIND}
+var Providers = []Provider{OPEN_AI, ANTHROPIC, DEEP_MIND}
 
 const (
 	StrategySingle      = "single"
