@@ -2,29 +2,8 @@ package openai
 
 import "github.com/vidurkhanal/infuse/providers"
 
-type OpenAIChatCompleteConfig struct {
-	Model            providers.ParameterConfig `json:"model"`
-	Messages         providers.ParameterConfig `json:"messages"`
-	Functions        providers.ParameterConfig `json:"functions"`
-	FunctionCall     providers.ParameterConfig `json:"function_call"`
-	MaxTokens        providers.ParameterConfig `json:"max_tokens"`
-	Temperature      providers.ParameterConfig `json:"temperature"`
-	TopP             providers.ParameterConfig `json:"top_p"`
-	N                providers.ParameterConfig `json:"n"`
-	Stream           providers.ParameterConfig `json:"stream"`
-	Stop             providers.ParameterConfig `json:"stop"`
-	PresencePenalty  providers.ParameterConfig `json:"presence_penalty"`
-	FrequencyPenalty providers.ParameterConfig `json:"frequency_penalty"`
-	LogitBias        providers.ParameterConfig `json:"logit_bias"`
-	User             providers.ParameterConfig `json:"user"`
-	Seed             providers.ParameterConfig `json:"seed"`
-	Tools            providers.ParameterConfig `json:"tools"`
-	ToolChoice       providers.ParameterConfig `json:"tool_choice"`
-	ResponseFormat   providers.ParameterConfig `json:"response_format"`
-}
-
-func NewOpenAIChatCompleteConfig() *OpenAIChatCompleteConfig {
-	return &OpenAIChatCompleteConfig{
+func NewOpenAIChatCompleteConfig() *providers.Params {
+	return &providers.Params{
 		Model: providers.ParameterConfig{
 			Default:  "gpt-3.5-turbo",
 			Param:    "model",

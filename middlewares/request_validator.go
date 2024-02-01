@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"fmt"
-	"slices"
 
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
@@ -19,20 +18,22 @@ func RequestValidator(c *fiber.Ctx) error {
 		})
 	}
 
-	if (c.Get(fmt.Sprintf("x-%s-mode", constants.POWERED_BY)) == "") ||
-		!slices.Contains(constants.Providers,
-			c.Get(fmt.Sprintf("x-%s-mode", constants.POWERED_BY))) {
-
+	if (c.Get(fmt.Sprintf("x-%s-mode", constants.POWERED_BY)) == "") &&
+		(c.Get(fmt.Sprintf("x-%s-provider", constants.POWERED_BY)) == "") {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"status":  "error",
-			"message": fmt.Sprintf("missing or invalid header: %s", fmt.Sprintf("x-%s-mode", constants.POWERED_BY)),
+			"status": "error",
+			"message": fmt.Sprintf("missing or invalid header: %s or %s",
+				fmt.Sprintf("x-%s-mode", constants.POWERED_BY),
+				fmt.Sprintf("x-%s-provider", constants.POWERED_BY)),
 		})
 	}
 
 	if c.Get(fmt.Sprintf("x-%s-config", constants.POWERED_BY)) == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"status":  "error",
-			"message": fmt.Sprintf("missing header: %s", fmt.Sprintf("x-%s-config", constants.POWERED_BY)),
+			"status": "error",
+			"message": fmt.Sprintf("missing header: %s ",
+				fmt.Sprintf("x-%s-config", constants.POWERED_BY),
+			),
 		})
 	}
 

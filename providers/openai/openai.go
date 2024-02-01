@@ -4,7 +4,7 @@ import "github.com/vidurkhanal/infuse/providers"
 
 type OpenAIConfig struct {
 	ApiConfig          providers.ProviderAPIConfig
-	ChatCompleteConfig *OpenAIChatCompleteConfig
+	ChatCompleteConfig *providers.Params
 }
 
 func NewOpenAIConfig() *OpenAIConfig {
