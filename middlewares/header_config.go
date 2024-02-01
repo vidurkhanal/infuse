@@ -3,16 +3,18 @@ package middlewares
 import (
 	"cmp"
 	"errors"
+	"slices"
 	"strings"
 
 	"github.com/vidurkhanal/infuse/constants"
 )
 
 var (
-	STRATEGY_MODE []string = []string{
+	STRATEGY_MODES []string = []string{
 		constants.StrategyFallback,
 		constants.StrategySingle,
 		constants.StrategyLoadBalance,
+		constants.StrategyConcurrent,
 	}
 
 	CACHE_MODE []string = []string{constants.CacheSimple, constants.CacheSemantic}
@@ -35,7 +37,7 @@ type HeaderConfigRetry struct {
 
 type HeaderConfig struct {
 	Strategy      HeaderConfigStrategy `json:"strategy"`
-	Provider      string               `json:"provider"`
+	Provider      constants.Provider   `json:"provider"`
 	APIKey        string               `json:"apiKey"`
 	Cache         HeaderConfigCache    `json:"cache"`
 	Retry         HeaderConfigRetry    `json:"retry"`
@@ -49,7 +51,7 @@ func (h HeaderConfig) Validate() error {
 		// has provider name and api key
 		if !contains(constants.Providers, h.Provider) {
 			return errors.New(
-				h.Provider + " is an invalid provider or is not supported yet by " + constants.POWERED_BY)
+				string(h.Provider) + " is an invalid provider or is not supported yet by " + constants.POWERED_BY)
 		}
 	} else if h.Strategy.Mode != "" && len(h.Targets) > 0 {
 		// has strategy mode and targets
@@ -75,22 +77,22 @@ func (h HeaderConfig) Validate() error {
 }
 
 func (s HeaderConfigStrategy) Validate() error {
-	if contains(STRATEGY_MODE, s.Mode) {
+	if slices.Contains(STRATEGY_MODES, s.Mode) {
 		return nil
 	}
 	return errors.New("invalid strategy mode")
 }
 
 func (c HeaderConfigCache) Validate() error {
-	if contains(CACHE_MODE, c.Mode) {
+	if slices.Contains(CACHE_MODE, c.Mode) {
 		return nil
 	}
 	return errors.New("invalid cache mode")
 }
 
-func contains(s []string, e string) bool {
+func contains(s []constants.Provider, e constants.Provider) bool {
 	for _, a := range s {
-		if cmp.Compare(a, strings.ToLower(e)) == 0 {
+		if cmp.Compare(string(a), strings.ToLower(string(e))) == 0 {
 			return true
 		}
 	}

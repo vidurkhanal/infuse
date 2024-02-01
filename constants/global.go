@@ -41,6 +41,7 @@ const (
 	StrategySingle      = "single"
 	StrategyLoadBalance = "loadbalance"
 	StrategyFallback    = "fallback"
+	StrategyConcurrent  = "concurrent"
 
 	CacheSimple   = "simple"
 	CacheSemantic = "semantic"

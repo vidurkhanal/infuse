@@ -23,12 +23,24 @@ func TryTarget(c *fiber.Ctx, t config.Target, fn, method, path string) (*fasthtt
 	case constants.StrategySingle:
 		// try single target
 		return SingleTarget(c, t, fn, method, path)
+	case constants.StrategyConcurrent:
+		return Concurrent(c, t, fn, method, path)
 	default:
 		return TryPost(c, t, fn, method, path)
 	}
 }
 
 func Fallback(c *fiber.Ctx, t config.Target, fn, method, path string) (*fasthttp.Response, error) {
+	for _, t := range t.Targets {
+		res, err := TryTarget(c, t, fn, method, path)
+		if err != nil {
+			return res, err
+		}
+	}
+	return &fasthttp.Response{}, errors.New("none of the targets are working")
+}
+
+func Concurrent(c *fiber.Ctx, t config.Target, fn, method, path string) (*fasthttp.Response, error) {
 	// Todo
 	var wg sync.WaitGroup
 	var res *fasthttp.Response
@@ -71,5 +83,15 @@ func SingleTarget(c *fiber.Ctx, t config.Target, fn, method, path string) (*fast
 }
 
 func TryPost(c *fiber.Ctx, t config.Target, fn, method, path string) (*fasthttp.Response, error) {
+	// var apiConfig providers.ProviderAPIConfig
+	// switch t.Provider {
+	// case string(constants.OPEN_AI):
+	// 	apiConfig = config.Providers().OpenAIConfig.ApiConfig
+	// default:
+	// 	apiConfig = config.Providers().OpenAIConfig.ApiConfig
+	// }
+	//
+
+	_ = config.Providers().OpenAIConfig.ApiConfig
 	return TryTarget(c, t, fn, fiber.MethodPost, path)
 }
