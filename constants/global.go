@@ -1,14 +1,6 @@
 package constants
 
-type ContentType string
-
 const POWERED_BY string = "infuse"
-
-const (
-	ApplicationJSON   ContentType = "application/json"
-	MultipartFormData ContentType = "multipart/form-data"
-	EventStream       ContentType = "text/event-stream"
-)
 
 type Header struct {
 	Mode     string

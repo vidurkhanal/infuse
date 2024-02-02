@@ -9,9 +9,9 @@ import (
 )
 
 func RequestValidator(c *fiber.Ctx) error {
-	if c.Get("content-type") == "" ||
-		(c.Get("content-type") != "application/json" &&
-			c.Get("content-type") != string(constants.MultipartFormData)) {
+	if c.Get(fiber.HeaderContentType) == "" ||
+		(c.Get(fiber.HeaderContentType) != fiber.MIMEApplicationJSON &&
+			c.Get(fiber.HeaderContentType) != fiber.MIMEMultipartForm) {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  "error",
 			"message": "either missing content-type headed or invalid content type",
