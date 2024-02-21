@@ -86,9 +86,7 @@ func (app App) StartHTTPServer() {
 	})
 
 	v1 := app.Group("/v1")
-	v1.Post("/chat/completions", handlers.ChatCompletionsHandler)
-	v1.Post("/completions", handlers.CompletionsHandler)
-	v1.Post("/embedding", handlers.EmbeddingHandler)
+	v1.Post("/chat", handlers.ChatCompletionsHandler)
 
 	if err := app.Listen(":8080"); err != nil {
 		// Graceful shutdown
