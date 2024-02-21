@@ -1,9 +1,10 @@
 package config
 
+import "github.com/vidurkhanal/infuse/constants"
+
 type Config struct {
 	/** maybe "single" | "fallback" | "loadbalance" | "scientist" */
 	Mode     string        `json:"mode"`
-	Options  []Option      `json:"options"`
 	Targets  []Target      `json:"targets"`
 	Cache    CacheSettings `json:"cache"`
 	Retry    RetrySettings `json:"retry"`
@@ -13,7 +14,7 @@ type Config struct {
 type Target struct {
 	Strategy Strategy `json:"strategy"`
 	/** The name of the provider. */
-	Provider string `json:"provider"`
+	Provider constants.Provider `json:"provider"`
 	/** The name of the API key for the provider. */
 	VirtualKey string `json:"virtualKey"`
 	/** The API key for the provider. */
@@ -22,10 +23,6 @@ type Target struct {
 	Weight int `json:"weight"`
 	/** The retry settings for the provider. */
 	Retry RetrySettings `json:"retry"`
-	/** The parameters to override in the request. */
-	OverrideParams Params `json:"overrideParams"`
-	/** The actual url used to make llm calls */
-	UrlToFetch string `json:"urlToFetch"`
 	/** Azure specific */
 	ResourceName string `json:"resourceName"`
 	DeploymentId string `json:"deploymentId"`
@@ -35,23 +32,6 @@ type Target struct {
 	Index   int           `json:"index"`
 	Cache   CacheSettings `json:"cache"`
 	Targets []Target      `json:"targets"`
-}
-
-type Option struct {
-	Provider       string            `json:"provider"`
-	VirtualKey     string            `json:"virtualKey"`
-	ApiKey         string            `json:"apiKey"`
-	Weight         int               `json:"weight"`
-	Retry          RetrySettings     `json:"retry"`
-	OverrideParams Params            `json:"overrideParams"`
-	UrlToFetch     string            `json:"urlToFetch"`
-	ResourceName   string            `json:"resourceName"`
-	DeploymentId   string            `json:"deploymentId"`
-	ApiVersion     string            `json:"apiVersion"`
-	AdAuth         string            `json:"adAuth"`
-	Index          int               `json:"index"`
-	Cache          CacheSettings     `json:"cache"`
-	Metadata       map[string]string `json:"metadata"`
 }
 
 type RetrySettings struct {
