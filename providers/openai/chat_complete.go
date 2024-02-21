@@ -2,77 +2,77 @@ package openai
 
 import "github.com/vidurkhanal/infuse/providers"
 
-func NewOpenAIChatCompleteConfig() *providers.Params {
-	return &providers.Params{
-		Model: providers.ParameterConfig{
+func NewOpenAIChatCompleteConfig() map[string]providers.ParameterConfig {
+	return map[string]providers.ParameterConfig{
+		"model": {
 			Default:  "gpt-3.5-turbo",
 			Param:    "model",
 			Required: true,
 		},
-		Messages: providers.ParameterConfig{
+		"messages": {
 			Param:   "messages",
 			Default: " ",
 		},
-		Functions: providers.ParameterConfig{
+		"functions": {
 			Param: "functions",
 		},
-		FunctionCall: providers.ParameterConfig{
+		"function_call": {
 			Param: "function_call",
 		},
-		MaxTokens: providers.ParameterConfig{
+		"max_tokens": {
 			Param:   "max_tokens",
 			Default: 100,
 			Min:     0,
 		},
-		Temperature: providers.ParameterConfig{
+		"temperature": {
 			Param:   "temperature",
 			Default: 1,
 			Min:     0,
 			Max:     2,
 		},
-		TopP: providers.ParameterConfig{
+		"top_p": {
 			Param:   "top_p",
 			Default: 1,
 			Min:     0,
 			Max:     1,
 		},
-		N: providers.ParameterConfig{
+		"n": {
 			Param:   "n",
 			Default: 1,
 		},
-		Stream: providers.ParameterConfig{
+		"stream": {
 			Param:   "stream",
 			Default: false,
 		},
-		Stop: providers.ParameterConfig{
+		"stop": {
 			Param: "stop",
 		},
-		PresencePenalty: providers.ParameterConfig{
+		"presence_penalty": {
 			Param: "presence_penalty",
 			Min:   -2,
 			Max:   2,
 		},
-		FrequencyPenalty: providers.ParameterConfig{
+		"frequency_penalty": {
 			Param: "frequency_penalty",
 			Min:   -2,
 			Max:   2,
 		},
-		LogitBias: providers.ParameterConfig{
+		"logit_bias": {
 			Param: "logit_bias",
 		},
-		User: providers.ParameterConfig{
+		"user": {
 			Param: "user",
 		},
-		Seed: providers.ParameterConfig{
+		"seed": {
 			Param: "seed",
 		},
-		Tools: providers.ParameterConfig{
+		"tools": {
 			Param: "tools",
 		},
-		ToolChoice: providers.ParameterConfig{
+		"tool_choice": {
 			Param: "tool_choice",
 		},
-		ResponseFormat: providers.ParameterConfig{
+		"response_format": {
 			Param: "response_format",
 		},
 	}

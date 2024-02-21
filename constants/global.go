@@ -8,6 +8,7 @@ type Header struct {
 	Provider string
 	TraceID  string
 	Cache    string
+	Config   string
 }
 
 var HeaderKeys = Header{
@@ -16,6 +17,7 @@ var HeaderKeys = Header{
 	Provider: "x-" + POWERED_BY + "-provider",
 	TraceID:  "x-" + POWERED_BY + "-trace-id",
 	Cache:    "x-" + POWERED_BY + "-cache",
+	Config:   "x-" + POWERED_BY + "-config",
 }
 
 type Provider string

@@ -9,6 +9,7 @@ import (
 	"github.com/valyala/fasthttp"
 	"github.com/vidurkhanal/infuse/config"
 	"github.com/vidurkhanal/infuse/constants"
+	"github.com/vidurkhanal/infuse/providers/openai"
 	"github.com/vidurkhanal/infuse/utils"
 )
 
@@ -83,15 +84,10 @@ func SingleTarget(c *fiber.Ctx, t config.Target, fn, method, path string) (*fast
 }
 
 func TryPost(c *fiber.Ctx, t config.Target, fn, method, path string) (*fasthttp.Response, error) {
-	// var apiConfig providers.ProviderAPIConfig
-	// switch t.Provider {
-	// case string(constants.OPEN_AI):
-	// 	apiConfig = config.Providers().OpenAIConfig.ApiConfig
-	// default:
-	// 	apiConfig = config.Providers().OpenAIConfig.ApiConfig
-	// }
-	//
-
-	_ = config.Providers().OpenAIConfig.ApiConfig
-	return TryTarget(c, t, fn, fiber.MethodPost, path)
+	switch t.Provider {
+	case constants.OPEN_AI:
+		return openai.Ingest(c, t, fn, method, path)
+	default:
+		return &fasthttp.Response{}, errors.New("provider not implemented yet.")
+	}
 }

@@ -1,5 +1,7 @@
 package openai
 
+import "errors"
+
 type OpenAIAPIConfig struct {
 	BaseURL      string
 	ChatComplete string
@@ -16,8 +18,15 @@ func (c *OpenAIAPIConfig) GetBaseURL() string {
 	return c.BaseURL
 }
 
-func (c *OpenAIAPIConfig) GetEndpoint() string {
-	return c.BaseURL + c.ChatComplete
+func (c *OpenAIAPIConfig) GetEndpoint(fn string) (string, error) {
+	switch fn {
+	case "chat":
+		return c.BaseURL + c.ChatComplete, nil
+	case "embed":
+		return c.BaseURL + c.Embed, nil
+	default:
+		return "", errors.New("Invalid function")
+	}
 }
 
 func NewOpenAIAPIConfig() *OpenAIAPIConfig {

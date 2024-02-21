@@ -3,28 +3,7 @@ package providers
 type ProviderAPIConfig interface {
 	Headers(string) map[string]string
 	GetBaseURL() string
-	GetEndpoint() string
-}
-
-type ProviderFeatConfig struct {
-	Model            ParameterConfig `json:"model"`
-	Messages         ParameterConfig `json:"messages"`
-	Functions        ParameterConfig `json:"functions"`
-	FunctionCall     ParameterConfig `json:"functionCall"`
-	MaxTokens        ParameterConfig `json:"maxTokens"`
-	Temperature      ParameterConfig `json:"temperature"`
-	TopP             ParameterConfig `json:"topP"`
-	N                ParameterConfig `json:"n"`
-	Stream           ParameterConfig `json:"stream"`
-	Stop             ParameterConfig `json:"stop"`
-	PresencePenalty  ParameterConfig `json:"presencePenalty"`
-	FrequencyPenalty ParameterConfig `json:"frequencyPenalty"`
-	LogitBias        ParameterConfig `json:"logitBias"`
-	User             ParameterConfig `json:"user"`
-	Seed             ParameterConfig `json:"seed"`
-	Tools            ParameterConfig `json:"tools"`
-	ToolChoice       ParameterConfig `json:"toolChoice"`
-	ResponseFormat   ParameterConfig `json:"responseFormat"`
+	GetEndpoint(string) (string, error)
 }
 
 type ParameterConfig struct {
