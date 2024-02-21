@@ -13,20 +13,20 @@ import (
 func ConstructConfig(c *fiber.Ctx) (config.Target, error) {
 	var config config.Target
 	if err := json.Unmarshal([]byte(
-		c.Get(fmt.Sprintf("x-%s-config",
-			constants.POWERED_BY))), &config); err != nil {
+		c.Get(constants.HeaderKeys.Config)), &config); err != nil {
 		return config, err
 	}
 
 	if config.Provider == "" && len(config.Targets) == 0 {
-		config.Provider = c.Get(fmt.Sprintf("x-%s-mode", constants.POWERED_BY))
+		config.Provider = constants.Provider(c.Get(fmt.Sprintf("x-%s-mode", constants.POWERED_BY)))
 		config.ApiKey = getBearerToken(c.Get("authorization"))
-		if config.Provider == string(constants.AZURE_OPEN_AI) {
+		if config.Provider == constants.AZURE_OPEN_AI {
 			config.ResourceName = c.Get(fmt.Sprintf("x-%s-azure-resource-name", constants.POWERED_BY))
 			config.DeploymentId = c.Get(fmt.Sprintf("x-%s-azure-deployment-id", constants.POWERED_BY))
 			config.ApiVersion = c.Get(fmt.Sprintf("x-%s-azure-api-version", constants.POWERED_BY))
 		}
 	}
+	fmt.Printf("config: %#v", config)
 
 	return config, nil
 }
